@@ -9,20 +9,20 @@
 cd /lustre/storeB/users/andreasd/postclim/3DBC/pr/CurC
 mkdir -p merged split
 for m in 01 02 03 04 05 06 07 08 09 10 11 12
-do cdo mergetime hist_MPI_CCLM_RR_daily_1971-2010_${m}??.nc merged/hist_MPI_CCLM_RR_daily_1971-2010_${m}.nc
-   cdo splityear merged/hist_MPI_CCLM_RR_daily_1971-2010_${m}.nc split/hist_MPI_CCLM_RR_daily_${m}_
+do cdo mergetime hist_CNRM_CCLM_RR_daily_1971-2010_${m}??.nc merged/hist_CNRM_CCLM_RR_daily_1971-2010_${m}.nc
+   cdo splityear merged/hist_CNRM_CCLM_RR_daily_1971-2010_${m}.nc split/hist_CNRM_CCLM_RR_daily_${m}_
 done
 
 # remove merged month files
-rm merged/hist_MPI_CCLM_RR_daily_1971-2010_??.nc
+rm merged/hist_CNRM_CCLM_RR_daily_1971-2010_??.nc
 
 # merge files for one year
 for ((y=1971;y<=2010;y=y+1))
-do cdo -z zip -f nc4 mergetime split/hist_MPI_CCLM_RR_daily_??_${y}.nc merged/hist_MPI_CCLM_RR_daily_${y}.nc
+do cdo -z zip -f nc4 mergetime split/hist_CNRM_CCLM_RR_daily_??_${y}.nc merged/hist_CNRM_CCLM_RR_daily_${y}.nc
 done
 
 # remove split files
-rm split/hist_MPI_CCLM_RR_daily_??_????.nc
+rm split/hist_CNRM_CCLM_RR_daily_??_????.nc
 rmdir split
 
 ###################
@@ -31,20 +31,21 @@ rmdir split
 cd /lustre/storeB/users/andreasd/postclim/3DBC/pr/FutC
 mkdir -p merged split
 for m in 01 02 03 04 05 06 07 08 09 10 11 12
-do cdo mergetime rcp85_MPI_CCLM_RR_daily_2011-2100_${m}??.nc merged/rcp85_MPI_CCLM_RR_daily_2011-2100_${m}.nc
-   cdo splityear merged/rcp85_MPI_CCLM_RR_daily_2011-2100_${m}.nc split/rcp85_MPI_CCLM_RR_daily_${m}_
+do cdo mergetime rcp85_CNRM_CCLM_RR_daily_2011-2100_${m}??.nc merged/rcp85_CNRM_CCLM_RR_daily_2011-2100_${m}.nc
+   cdo splityear merged/rcp85_CNRM_CCLM_RR_daily_2011-2100_${m}.nc split/rcp85_CNRM_CCLM_RR_daily_${m}_
 done
 
 # remove merged month files
-rm merged/rcp85_MPI_CCLM_RR_daily_2011-2100_??.nc
+rm merged/rcp85_CNRM_CCLM_RR_daily_2011-2100_??.nc
+
 
 # merge files for one year
 for ((y=2011;y<=2100;y=y+1))
-do cdo -z zip -f nc4 mergetime split/rcp85_MPI_CCLM_RR_daily_??_${y}.nc merged/rcp85_MPI_CCLM_RR_daily_${y}.nc
+do cdo -z zip -f nc4 mergetime split/rcp85_CNRM_CCLM_RR_daily_??_${y}.nc merged/rcp85_CNRM_CCLM_RR_daily_${y}.nc
 done
 
 # remove split files
-rm split/rcp85_MPI_CCLM_RR_daily_??_????.nc
+rm split/rcp85_CNRM_CCLM_RR_daily_??_????.nc
 rmdir split
 
 ###################
@@ -54,20 +55,20 @@ rmdir split
 cd /lustre/storeB/users/andreasd/postclim/3DBC/tas/CurC
 mkdir -p merged split
 for m in 01 02 03 04 05 06 07 08 09 10 11 12
-do cdo mergetime hist_MPI_CCLM_TM_daily_1971-2010_${m}??.nc merged/hist_MPI_CCLM_TM_daily_1971-2010_${m}.nc
-   cdo splityear merged/hist_MPI_CCLM_TM_daily_1971-2010_${m}.nc split/hist_MPI_CCLM_TM_daily_${m}_
+do cdo mergetime hist_CNRM_CCLM_TM_daily_1971-2010_${m}??.nc merged/hist_CNRM_CCLM_TM_daily_1971-2010_${m}.nc
+   cdo splityear merged/hist_CNRM_CCLM_TM_daily_1971-2010_${m}.nc split/hist_CNRM_CCLM_TM_daily_${m}_
 done
 
 # remove merged month files
-rm merged/hist_MPI_CCLM_TM_daily_1971-2010_??.nc
+rm merged/hist_CNRM_CCLM_TM_daily_1971-2010_??.nc
 
 # merge files for one year
 for ((y=1971;y<=2010;y=y+1))
-do cdo -z zip -f nc4 mergetime split/hist_MPI_CCLM_TM_daily_??_${y}.nc merged/hist_MPI_CCLM_TM_daily_${y}.nc
+do cdo -z zip -f nc4 mergetime split/hist_CNRM_CCLM_TM_daily_??_${y}.nc merged/hist_CNRM_CCLM_TM_daily_${y}.nc
 done
 
 # remove split files
-rm split/hist_MPI_CCLM_TM_daily_??_????.nc
+rm split/hist_CNRM_CCLM_TM_daily_??_????.nc
 rmdir split
 
 ###################
@@ -76,20 +77,20 @@ rmdir split
 cd /lustre/storeB/users/andreasd/postclim/3DBC/tas/FutC
 mkdir -p merged split
 for m in 01 02 03 04 05 06 07 08 09 10 11 12
-do cdo mergetime rcp85_MPI_CCLM_TM_daily_2011-2100_${m}??.nc merged/rcp85_MPI_CCLM_TM_daily_2011-2100_${m}.nc
-   cdo splityear merged/rcp85_MPI_CCLM_TM_daily_2011-2100_${m}.nc split/rcp85_MPI_CCLM_TM_daily_${m}_
+do cdo mergetime rcp85_CNRM_CCLM_TM_daily_2011-2100_${m}??.nc merged/rcp85_CNRM_CCLM_TM_daily_2011-2100_${m}.nc
+   cdo splityear merged/rcp85_CNRM_CCLM_TM_daily_2011-2100_${m}.nc split/rcp85_CNRM_CCLM_TM_daily_${m}_
 done
 
 # remove merged month files
-rm merged/rcp85_MPI_CCLM_TM_daily_2011-2100_??.nc
+rm merged/rcp85_CNRM_CCLM_TM_daily_2011-2100_??.nc
 
 # merge files for one year
 for ((y=2011;y<=2100;y=y+1))
-do cdo -z zip -f nc4 mergetime split/rcp85_MPI_CCLM_TM_daily_??_${y}.nc merged/rcp85_MPI_CCLM_TM_daily_${y}.nc
+do cdo -z zip -f nc4 mergetime split/rcp85_CNRM_CCLM_TM_daily_??_${y}.nc merged/rcp85_CNRM_CCLM_TM_daily_${y}.nc
 done
 
 # remove split files
-rm split/rcp85_MPI_CCLM_TM_daily_??_????.nc
+rm split/rcp85_CNRM_CCLM_TM_daily_??_????.nc
 rmdir split
 ###################################
 ## Adjust NetCDF header information
