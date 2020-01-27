@@ -9,7 +9,7 @@ It is basically a smart combination of quantile-mapping (or any usual bias-corre
 ### Table1
 Implementation and content of the Table 1 example from the paper. Note the comments in the script.
 
-### GCM-RCM (e.g., MPI-CCLM)
+### GCM_RCM (e.g., MPI_CCLM)
 Example scripts to post-process one of the bias-corrected **RCP8.5** RCM data sets from KSS/NVE used in Klima i Norge 2100.
 (MET Norway specific file locations need to be changed)
 
@@ -17,7 +17,7 @@ Example scripts to post-process one of the bias-corrected **RCP8.5** RCM data se
 2. The 3DBC script is applied to reorder the dates following the reference data (seNorge_2018) lag-1 autocorrelation (seperately for pr and tas).
 3. The data is remerged (remerge_data.sh) to the previous file structure.
 
-### RCP45/GCM-RCM
+### RCP45/GCM_RCM
 Same for emission scenario **RCP4.5**
 
 ### 3DBC output
