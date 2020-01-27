@@ -9,58 +9,58 @@
 #######################################################
 
 ### Split yearly files into monthly files
-cd /lustre/storeB/project/metkl/senorge2/thredds/seNorge/seNorge_2018/Archive
-for file in seNorge2018_197[1-9].nc seNorge2018_198* seNorge2018_199* seNorge2018_200* seNorge2018_2010.nc
-do cdo splitmon -selvar,tg $file /lustre/storeB/users/andreasd/postclim/3DBC/tas/Obs/${file}_month
-   cdo splitmon -selvar,rr $file /lustre/storeB/users/andreasd/postclim/3DBC/pr/Obs/${file}_month
-done
+#cd /lustre/storeB/project/metkl/senorge2/thredds/seNorge/seNorge_2018/Archive
+#for file in seNorge2018_197[1-9].nc seNorge2018_198* seNorge2018_199* seNorge2018_200* seNorge2018_2010.nc
+#do cdo splitmon -selvar,tg $file /lustre/storeB/users/andreasd/postclim/3DBC/tas/Obs/${file}_month
+#   cdo splitmon -selvar,rr $file /lustre/storeB/users/andreasd/postclim/3DBC/pr/Obs/${file}_month
+#done
 
 ###################
 ## Precipitation
 ###################
 
 # Merge monthly files over all years
-cd /lustre/storeB/users/andreasd/postclim/3DBC/pr/Obs/
-for m in 01 02 03 04 05 06 07 08 09 10 11 12
-do ncrcat seNorge2018_????.nc_month${m}.nc seNorge2018_1971-2010_${m}.nc
-done
+#cd /lustre/storeB/users/andreasd/postclim/3DBC/pr/Obs/
+#for m in 01 02 03 04 05 06 07 08 09 10 11 12
+#do ncrcat seNorge2018_????.nc_month${m}.nc seNorge2018_1971-2010_${m}.nc
+#done
 
 # Remove single monthly files
-rm seNorge2018_????.nc_month??.nc
+#rm seNorge2018_????.nc_month??.nc
 
 # Split into daily files
-for file in seNorge2018_1971-2010_??.nc
-do cdo splitday $file ${file}_day
-done
+#for file in seNorge2018_1971-2010_??.nc
+#do cdo splitday $file ${file}_day
+#done
 
 # Remove merged monthly files
-rm seNorge2018_1971-2010_??.nc
+#rm seNorge2018_1971-2010_??.nc
 
 # Rename files
-rename "s/.nc_day//g" seNorge2018_1971-2010_??.nc_day??.nc
+#rename "s/.nc_day//g" seNorge2018_1971-2010_??.nc_day??.nc
 
 ###################
 ## Temperature
 ###################
 # Merge monthly files over all years
-cd /lustre/storeB/users/andreasd/postclim/3DBC/tas/Obs/
-for m in 01 02 03 04 05 06 07 08 09 10 11 12
-do ncrcat seNorge2018_????.nc_month${m}.nc seNorge2018_1971-2010_${m}.nc
-done
+#cd /lustre/storeB/users/andreasd/postclim/3DBC/tas/Obs/
+#for m in 01 02 03 04 05 06 07 08 09 10 11 12
+#do ncrcat seNorge2018_????.nc_month${m}.nc seNorge2018_1971-2010_${m}.nc
+#done
 
 # Remove single monthly files
-rm seNorge2018_????.nc_month??.nc
+#rm seNorge2018_????.nc_month??.nc
 
 # Split into daily files
-for file in seNorge2018_1971-2010_??.nc
-do cdo splitday $file ${file}_day
-done
+#for file in seNorge2018_1971-2010_??.nc
+#do cdo splitday $file ${file}_day
+#done
 
 # Remove merged monthly files
-rm seNorge2018_1971-2010_??.nc
+#rm seNorge2018_1971-2010_??.nc
 
 # Rename files
-rename "s/.nc_day//g" seNorge2018_1971-2010_??.nc_day??.nc
+#rename "s/.nc_day//g" seNorge2018_1971-2010_??.nc_day??.nc
 
 #######################################################
 ## Climate data = bias-corrected RCM data from KSS/NVE
