@@ -10,7 +10,7 @@ It is basically a smart combination of quantile-mapping (or any usual bias-corre
 Implementation and content of the Table 1 example from the paper. Note the comments in the script.
 
 ### GCM-RCM (e.g., MPI-CCLM)
-Example scripts to post-process one of the bias-corrected RCM **RCP8.5** data sets from KSS/NVE used in Klima i Norge 2100.
+Example scripts to post-process one of the bias-corrected **RCP8.5** RCM data sets from KSS/NVE used in Klima i Norge 2100.
 (MET Norway specific file locations need to be changed)
 
 1. The data is split into files containing one day of the year each (prepare.sh).
