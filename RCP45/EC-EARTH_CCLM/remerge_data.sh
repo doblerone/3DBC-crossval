@@ -23,7 +23,7 @@ done
 
 # remove split files
 rm split/hist_EC-EARTH_CCLM_RR_daily_??_????.nc
-rmdir split
+
 
 ###################
 ### Future climate (rcp45)
@@ -46,7 +46,7 @@ done
 
 # remove split files
 rm split/rcp45_EC-EARTH_CCLM_RR_daily_??_????.nc
-rmdir split
+
 
 ###################
 ## Temperature
@@ -69,7 +69,7 @@ done
 
 # remove split files
 rm split/hist_EC-EARTH_CCLM_TM_daily_??_????.nc
-rmdir split
+
 
 ###################
 ### Future climate (rcp45)
@@ -91,7 +91,7 @@ done
 
 # remove split files
 rm split/rcp45_EC-EARTH_CCLM_TM_daily_??_????.nc
-rmdir split
+
 
 
 
