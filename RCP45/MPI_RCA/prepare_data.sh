@@ -113,7 +113,7 @@ rename "s/month//g" hist_MPI_RCA_TM_daily_1971-2010_month????.nc
 ###################
 ### Split yearly files into monthly files
 cd /lustre/storeB/project/KSS/proj/scenariodata/Precipitation/netcdf/MPI_RCA/rcp45/
-for file in rcp45_MPI_RCA_RR_daily_2???_v4.nc
+for file in rcp45_MPI_RCA_RR_daily_{2011..2100}_v4.nc
 do cdo splitmon $file /lustre/storeB/users/andreasd/postclim/3DBC/pr/Fut/${file}_month
 done
 
@@ -155,7 +155,7 @@ done
 ###################
 ### Split yearly files into monthly files
 cd /lustre/storeB/project/KSS/proj/scenariodata/Temperature/netcdf/MPI_RCA/rcp45/
-for file in rcp45_MPI_RCA_TM_daily_2???_v4.nc
+for file in rcp45_MPI_RCA_TM_daily_{2011..2100}_v4.nc
 do cdo splitmon $file /lustre/storeB/users/andreasd/postclim/3DBC/tas/Fut/${file}_month
 done
 
