@@ -32,20 +32,25 @@ for (p in 1:length(idy))
   print(paste("Started part",p,"on", date()))
   
   #read data
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/Obs/seNorge2018_RR_",RefYear,".nc",sep=""))
-  ObsA <- ncvar_get(nc,"rr",start = c(1,idy[p],1), count=c(-1,szy[p],-1))/24/3600 #convert to mm/seconds
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tas/Obs/seNorge2018_RR_",RefYear,".nc",sep=""))
+  ObsA <- ncvar_get(nc,"tn",start = c(1,idy[p],1), count=c(-1,szy[p],-1)) + 273.15 #convert to K
   nc_close(nc)
   
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/Cur/ecearth-r12i1p1-cclm_hist_eqm-sn2018v2005_rawbc_norway_1km_pr_daily_",RefYear,".nc4",sep=""))
-  CurA <- ncvar_get(nc,"pr",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tasmin/Cur/ecearth-r12i1p1-cclm_hist_eqm-sn2018v2005_rawbc_norway_1km_tasmin_daily_",RefYear,".nc4",sep=""))
+  CurA <- ncvar_get(nc,"tasmin",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
   #define mask with grid points with values
   ValMask <- which(!is.na(CurA[,,1]) ,arr.ind=T)
   NofPoints <- dim(ValMask)[1]
   
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/Cur/ecearth-r12i1p1-cclm_hist_eqm-sn2018v2005_rawbc_norway_1km_pr_daily_",YEAR,".nc4",sep=""))
-  FutA <- ncvar_get(nc,"pr",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tasmin/Cur/ecearth-r12i1p1-cclm_hist_eqm-sn2018v2005_rawbc_norway_1km_tasmin_daily_",YEAR,".nc4",sep=""))
+  FutA <- ncvar_get(nc,"tasmin",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc_close(nc)
+
+  # Mean temperature (as upper limit)
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tas/CurC/app/ecearth-r12i1p1-cclm_hist_3dbc-eqm-sn2018v2005_rawbc_norway_1km_tas_daily_",YEAR,".nc4",sep=""))
+  FutA_tmeanC <- ncvar_get(nc,"tas")
   nc_close(nc)
   
   #reading done
@@ -63,6 +68,7 @@ for (p in 1:length(idy))
     Obs <- ObsA[x,y,]
     Cur <- CurA[x,y,]
     Fut <- FutA[x,y,]
+    Fut_tn <- FutA_tmeanC[x,y,]
     
     #number of values
     nod <- length(Obs)
@@ -101,14 +107,16 @@ for (p in 1:length(idy))
       GaussFC[,t] <- rN*GaussFC[,t-1] + sqrt(1-rN*rN) %*% t(GaussOR[t]) #from 2nd time step
     
     ##Rank and reorder values
+    ##Use mean temperature as upper limit (analog seNorge)
     RankFC <- nodp1 -  rank(GaussFC,ties.method = "first")
-    FutCA[x,y,] <- sort(Fut,decreasing = TRUE)[RankFC]
+    FutCA_uc <- sort(Fut,decreasing = TRUE)[RankFC]
+    FutCA[x,y,] <- pmin(FutC_uc,Fut_tn)
   }
   #That's all :-)
   
   #Write to NetCDF
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/CurC/xval/ecearth-r12i1p1-cclm_hist_3dbc-eqm-sn2018v2005_rawbc_norway_1km_pr_daily_",YEAR,".nc4",sep=""),write=TRUE)
-  ncvar_put(nc,"pr",FutCA,start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tasmin/CurC/xval/ecearth-r12i1p1-cclm_hist_3dbc-eqm-sn2018v2005_rawbc_norway_1km_tasmin_daily_",YEAR,".nc4",sep=""),write=TRUE)
+  ncvar_put(nc,"tasmin",FutCA,start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
   rm(Obs,CurA,FutA,FutCA,ValMask)

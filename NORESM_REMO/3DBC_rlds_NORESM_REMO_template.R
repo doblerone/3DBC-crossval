@@ -32,20 +32,20 @@ for (p in 1:length(idy))
   print(paste("Started part",p,"on", date()))
   
   #read data
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/Obs/seNorge2018_RR_",RefYear,".nc",sep=""))
-  ObsA <- ncvar_get(nc,"rr",start = c(1,idy[p],1), count=c(-1,szy[p],-1))/24/3600 #convert to mm/seconds
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/rlds/Obs/HySN5_historical_rlds_daily_",RefYear,".nc4",sep=""))
+  ObsA <- ncvar_get(nc,"rlds",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/Cur/ecearth-r12i1p1-cclm_hist_eqm-sn2018v2005_rawbc_norway_1km_pr_daily_",RefYear,".nc4",sep=""))
-  CurA <- ncvar_get(nc,"pr",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/rlds/Cur/noresm-r1i1p1-remo_hist_eqm-hysn2018v2005era5_rawbc_norway_1km_rlds_daily_",RefYear,".nc4",sep=""))
+  CurA <- ncvar_get(nc,"rlds",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
   #define mask with grid points with values
   ValMask <- which(!is.na(CurA[,,1]) ,arr.ind=T)
   NofPoints <- dim(ValMask)[1]
   
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/Cur/ecearth-r12i1p1-cclm_hist_eqm-sn2018v2005_rawbc_norway_1km_pr_daily_",YEAR,".nc4",sep=""))
-  FutA <- ncvar_get(nc,"pr",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/rlds/Cur/noresm-r1i1p1-remo_hist_eqm-hysn2018v2005era5_rawbc_norway_1km_rlds_daily_",YEAR,".nc4",sep=""))
+  FutA <- ncvar_get(nc,"rlds",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
   #reading done
@@ -107,8 +107,8 @@ for (p in 1:length(idy))
   #That's all :-)
   
   #Write to NetCDF
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/pr/CurC/xval/ecearth-r12i1p1-cclm_hist_3dbc-eqm-sn2018v2005_rawbc_norway_1km_pr_daily_",YEAR,".nc4",sep=""),write=TRUE)
-  ncvar_put(nc,"pr",FutCA,start = c(1,idy[p],1), count=c(-1,szy[p],-1))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/rlds/CurC/xval/noresm-r1i1p1-remo_hist_3dbc-eqm-hysn2018v2005era5_rawbc_norway_1km_rlds_daily_",YEAR,".nc4",sep=""),write=TRUE)
+  ncvar_put(nc,"rlds",FutCA,start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
   rm(Obs,CurA,FutA,FutCA,ValMask)
