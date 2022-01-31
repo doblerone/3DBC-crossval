@@ -32,7 +32,7 @@ for (p in 1:length(idy))
   print(paste("Started part",p,"on", date()))
   
   #read data
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tas/Obs/seNorge2018_RR_",RefYear,".nc",sep=""))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tas/Obs/seNorge2018_",RefYear,".nc",sep=""))
   ObsA <- ncvar_get(nc,"tx",start = c(1,idy[p],1), count=c(-1,szy[p],-1)) + 273.15 #convert to K
   nc_close(nc)
   
