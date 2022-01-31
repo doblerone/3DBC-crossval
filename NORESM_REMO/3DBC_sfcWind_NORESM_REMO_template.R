@@ -36,7 +36,7 @@ for (p in 1:length(idy))
   ObsA <- ncvar_get(nc,"windspeed_10m",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/sfcWind/Cur/noresm-r1i1p1-remo_hist_eqm-hysn2018v2005era5_rawbc_norway_1km_sfcWind_daily_",RefYear,".nc4",sep=""))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/sfcWind/Cur/noresm-r1i1p1-remo_hist_eqm-klinogrid1612_rawbc_norway_1km_sfcWind_daily_",RefYear,".nc4",sep=""))
   CurA <- ncvar_get(nc,"sfcWind",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
@@ -44,7 +44,7 @@ for (p in 1:length(idy))
   ValMask <- which(!is.na(CurA[,,1]) ,arr.ind=T)
   NofPoints <- dim(ValMask)[1]
   
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/sfcWind/Cur/noresm-r1i1p1-remo_hist_eqm-hysn2018v2005era5_rawbc_norway_1km_sfcWind_daily_",YEAR,".nc4",sep=""))
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/sfcWind/Cur/noresm-r1i1p1-remo_hist_eqm-klinogrid1612_rawbc_norway_1km_sfcWind_daily_",YEAR,".nc4",sep=""))
   FutA <- ncvar_get(nc,"sfcWind",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
@@ -107,7 +107,7 @@ for (p in 1:length(idy))
   #That's all :-)
   
   #Write to NetCDF
-  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/sfcWind/CurC/xval/noresm-r1i1p1-remo_hist_3dbc-eqm-hysn2018v2005era5_rawbc_norway_1km_sfcWind_daily_",YEAR,".nc4",sep=""),write=TRUE)
+  nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/sfcWind/CurC/xval/noresm-r1i1p1-remo_hist_3dbc-eqm-klinogrid1612_rawbc_norway_1km_sfcWind_daily_",YEAR,".nc4",sep=""),write=TRUE)
   ncvar_put(nc,"sfcWind",FutCA,start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
   
