@@ -47,7 +47,7 @@ for (p in 1:length(idy))
   nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tasmax/Cur/noresm-r1i1p1-remo_hist_eqm-sn2018v2005_rawbc_norway_1km_tasmax_daily_",YEAR,".nc4",sep=""))
   FutA <- ncvar_get(nc,"tasmax",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
   nc_close(nc)
-
+  
   # Mean temperature (as lower limit)
   nc <- nc_open(paste("/lustre/storeB/users/andreasd/KiN_2023_data/3DBC/tas/CurC/app/noresm-r1i1p1-remo_hist_3dbc-eqm-sn2018v2005_rawbc_norway_1km_tas_daily_",YEAR,".nc4",sep=""))
   FutA_tmeanC <- ncvar_get(nc,"tas",start = c(1,idy[p],1), count=c(-1,szy[p],-1))
