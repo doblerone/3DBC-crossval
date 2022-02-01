@@ -109,7 +109,7 @@ for (p in 1:length(idy))
     ##Rank and reorder values
     ##Use mean temperature as upper limit (analog seNorge)
     RankFC <- nodp1 -  rank(GaussFC,ties.method = "first")
-    FutCA_uc <- sort(Fut,decreasing = TRUE)[RankFC]
+    FutC_uc <- sort(Fut,decreasing = TRUE)[RankFC]
     FutCA[x,y,] <- pmin(FutC_uc,Fut_tn)
   }
   #That's all :-)
